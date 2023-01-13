@@ -4,8 +4,11 @@ import com.accenture.apa.listado.usuarios.portlet.constants.UsuariosKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 
@@ -40,17 +43,29 @@ public class Usuarios extends MVCPortlet {
 
 	@Override
 	//Método de MVCPortlet que se usa para generar una vista en el portlet.
-	//Renderrequest se usa para poder pasar la información al jsp, renderresponse se usa para enviar la info
-	public void doView (RenderRequest request, RenderResponse response) throws IOException, PortletException  {
+	//Render se ejecuta siempre al recargar la página por primera vez y después de usar Action.
+	public void doView (RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException{
 		
 		
 		//UserLocalServiceUtil es una clase para interactuar con los usuarios de liferay.
+		
+		//Número total de usuarios.
 		int numUsers = UserLocalServiceUtil.getUsersCount();
 		
-        List<User> users = UserLocalServiceUtil.getUsers(0,numUsers);
 		
-    	request.setAttribute("users", users);
-		super.doView(request, response);
+		//Lista de los usuarios
+        List<User> users = new ArrayList<User>();
+        
+        //Recorre los usuarios del 0 al total.
+        users= UserLocalServiceUtil.getUsers(0,numUsers);
+        
+        //Crea atributo para usar en el jsp
+    	renderRequest.setAttribute("users", users);
+    	
+    	
+		super.doView(renderRequest, renderResponse);
+		
+	
 		
 		
 	}

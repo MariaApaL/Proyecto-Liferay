@@ -10,22 +10,21 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-
 @Component(
 		immediate = true,
 		property = {
 			
-			"javax.portlet.name=" + UsuariosKeys.USUARIOS,
-			"mvc.command.name=usersInfo"
+				"javax.portlet.name=" + UsuariosKeys.USUARIOS,
+				"mvc.command.name=show-users"
 		},
-		service = Portlet.class
+		service = MVCRenderCommand.class
 	)
-public class ShowUsersRenderCommand implements MVCRenderCommand {
+public class ShowUsersPageRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
-		// TODO Auto-generated method stub
-		return "/info.jsp";
+		
+		return "/users.jsp";
 	}
 
 }
