@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletSession;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -61,6 +62,7 @@ public class Usuarios extends MVCPortlet {
         
         //Crea atributo para usar en el jsp
     	renderRequest.setAttribute("users", users);
+    	
     	
     	
 		super.doView(renderRequest, renderResponse);

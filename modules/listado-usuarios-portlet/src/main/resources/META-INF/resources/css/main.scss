@@ -1,44 +1,8 @@
 body {
-    font-family: "Open Sans", sans-serif;
-    color: #585a61;
-  }
-  
-  a {
-    text-decoration: none;
-  }
-  
-  
-  #welcome {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    padding: 10px 0 100px 0;
-  }
-  
-  #welcome::before {
-    content: "";
-    position: absolute;
-    right: -100%;
-    top: 20%;
-    width: 250%;
-    height: 200%;
-    z-index: -1;
-    background-color: #e8ecf5;
-    transform: skewY(135deg);
-  }
-  
-  
-  #welcome h5 {
-    margin: 0 0 10px 0;
-    color: #515f7d;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  #welcome h6 {
-    color: #515f7d;
-    margin-bottom: 50px;
-  }
-    
-    #welcome img {
-      width: 70%;
-    }
+    background: #e8cbc0;
+    background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
+    background: linear-gradient(to right, #e8cbc0, #636fa4);
+    min-height: 100vh;
+}
+
+
