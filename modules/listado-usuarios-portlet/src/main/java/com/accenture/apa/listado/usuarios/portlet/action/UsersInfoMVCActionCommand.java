@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
@@ -28,34 +30,12 @@ import org.osgi.service.component.annotations.Component;
 
 public class UsersInfoMVCActionCommand implements MVCActionCommand {
 
-	public void userInformation (ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException {
-		try {
-
-			long userId = ParamUtil.getLong(actionRequest, "userId");
-			String screenName= ParamUtil.getString(actionRequest, "screenName");
-			String firstName = ParamUtil.getString(actionRequest, "firstName");
-			String lastName = ParamUtil.getString(actionRequest, "lastName");
-			
-			String email = ParamUtil.getString(actionRequest, "email");
-			long phone = ParamUtil.getLong(actionRequest, "phone");
-			
-
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-	}
-
+	
+	
 	@Override
 	public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
 		
-		try {
-			userInformation(actionRequest,actionResponse);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		return true;
 	}
 

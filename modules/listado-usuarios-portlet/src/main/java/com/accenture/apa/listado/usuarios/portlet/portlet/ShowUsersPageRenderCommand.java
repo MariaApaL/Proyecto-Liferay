@@ -2,6 +2,7 @@ package com.accenture.apa.listado.usuarios.portlet.portlet;
 
 import com.accenture.apa.listado.usuarios.portlet.constants.UsuariosKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.util.ParamUtil;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -24,7 +25,9 @@ public class ShowUsersPageRenderCommand implements MVCRenderCommand {
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		
-		return "/users.jsp";
+		long id = ParamUtil.getLong(renderRequest, "id");
+		
+		return "/info.jsp";
 	}
 
 }

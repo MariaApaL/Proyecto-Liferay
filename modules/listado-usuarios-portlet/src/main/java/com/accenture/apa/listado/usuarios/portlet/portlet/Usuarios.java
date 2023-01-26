@@ -62,9 +62,7 @@ public class Usuarios extends MVCPortlet {
         
         //Crea atributo para usar en el jsp
     	renderRequest.setAttribute("users", users);
-    	
-    	
-    	
+   
 		super.doView(renderRequest, renderResponse);
 		
 	

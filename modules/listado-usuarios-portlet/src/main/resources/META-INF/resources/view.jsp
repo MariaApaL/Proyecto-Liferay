@@ -1,3 +1,5 @@
+<%@page import="com.liferay.expando.kernel.model.ExpandoBridge"%>
+<%@page import="javax.portlet.RenderResponse"%>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@ include file="/init.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,22 +16,17 @@
 	List<User> users = (List<User>) request.getAttribute("users");
 
 	themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-
-	PortletURL redirectURL = renderResponse.createRenderURL();
-
-	redirectURL.setParameter("info", "/users.jsp");
+	String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
+	System.out.println(portletId);
+	
+    
 %>
 
 
-<!-- Esto se usa para crear una url para moverse de una vista a otra -->
+
 <liferay-portlet:renderURL var="usersURL">
-	<liferay-portlet:param name="mvcRenderCommand" value="show-users" />
-	<!--  Aquí se indica a donde va a dirigir esta url. -->
+	<liferay-portlet:param name="mvcRenderCommandName" value="show-users" />
 	<liferay-portlet:param name="backURL" value="<%=currentURL%>" />
-	<%-- <liferay-portlet:param name="redirect" value="<%=currentURL%>"/> --%>
-
-
-
 </liferay-portlet:renderURL>
 
 
@@ -38,49 +35,63 @@
 
 <body>
 
-		<!-- Forma despues de Rafa -->
+	<!-- Forma despues de Rafa -->
 
 
-					
-					
+
+
 	<div class="container">
-        <div class="row text-center">
-        <%
-						for (int i = 0; i < users.size(); i++) {
-							if (!(users.get(i).getFirstName().equals("")) && !(users.get(i).getFirstName().equals("Anonymous"))) {
-							String fullName= users.get(i).getFirstName()+" " + users.get(i).getLastName();
-					%>
-            <div class="col-xl-6 col-sm-2 mb-5">
-                <div class="bg-white rounded shadow-sm py-5 px-4">
-                    <img src="<%=users.get(i).getPortraitURL(themeDisplay)%>" alt="avatar" width="100"
-                        class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                        <br>
-                    <h5 class="mb-0"><%=fullName%></h5>
-     
-                    <span class="small text-uppercase text-muted"><%=users.get(i).getJobTitle()%></span>
-                    <br>
-                    <br>
-                    <button type="button" class="btn btn-secondary btn-sm"
-								onClick="redirect('<%=redirectURL.toString()%>')">
-								Información</button>
-                </div>
-            </div>
-     
-		
+		<div class="row text-center">
+			<%
+				for (int i = 0; i < users.size(); i++) {
+					if (!(users.get(i).getFirstName().equals("")) && !(users.get(i).getFirstName().equals("Anonymous"))) {
+					
+			%>
+			<div class="col-xl-6 col-sm-2 mb-5">
+				<div class="bg-white rounded shadow-sm py-5 px-4">
+					<img src="<%=users.get(i).getPortraitURL(themeDisplay)%>"
+						alt="avatar" width="100"
+						class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+					<br>
+					<h5 class="mb-0"><%=users.get(i).getFullName()%></h5>
 
-					<%
-						}
+					<span class="small text-uppercase text-muted"><%=users.get(i).getJobTitle()%></span>
+					<br> <br>
 
-						}
-					%>
-				
+					<button class="boton-lista" onClick="createRowURL('<%=users.get(i).getUserId()%>')">Información</button>
+
+				</div>
 			</div>
+
+
+			<%
+				}
+
+				}
+			%>
+
 		</div>
+	</div>
 
 
 </body>
 
 
+<script type="text/javascript">
+
+	//funcion que recoge el id y cambia de vista.
+	
+	function createRowURL(id) {
+		console.log("entro al metodo");
+		var renderURL = Liferay.PortletURL.createRenderURL();
+		renderURL.setParameter("mvcRenderCommandName", "show-users");
+		renderURL.setParameter("id", id);
+        renderURL.setParameter("backURL","<%=currentURL%>");
+		renderURL.setPortletId("<%=portletId%>");
+		window.location.href = renderURL.toString();
+	}
+
+</script>
 
 <!-- También funciona -->
 <%-- 
@@ -113,16 +124,3 @@
     
 </div> --%>
 
-<script type="text/javascript">
-	function createRowURL() {
-		var renderURL = Liferay.PortletURL.createURL(themeDisplay
-				.getURLControlPanel())
-		renderURL.setParameter("
-									mvc", "/users.jsp");
-		window.location.href=renderURL.toString();
-									}
-
-	function redirect(url) {
-
-		window.location.href=url;}
-</script>
