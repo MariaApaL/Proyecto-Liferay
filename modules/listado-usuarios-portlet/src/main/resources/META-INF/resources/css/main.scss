@@ -1,21 +1,22 @@
 body {
-    background: #e8cbc0;
-    background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
-    background: linear-gradient(to right, #e8cbc0, #636fa4);
-    min-height: 100vh;
+  background: #e8cbc0;
+  background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
+  background: linear-gradient(to right, #e8cbc0, #636fa4);
+  min-height: 100vh;
 }
 
 
-.boton-lista{
-    background: #5777ba;
-    color: #fff;
-    padding: 12px 25px;
-    
-    color: #fff;
-    
-    border-radius: 50px;
-  }
+.info {
+  background-color: #5777ba;
+  //padding: 12px;
+ margin: 2px;
+  color: #fff;
+  border-radius: 50px;
+}
 
-  span{
-    padding:5px;
-  }
+
+
+
+span {
+  padding: 5px;
+}

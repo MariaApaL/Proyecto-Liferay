@@ -23,7 +23,11 @@ import org.osgi.service.component.annotations.Component;
 
 /**
  * @author maria.luque.lopez
+ * 
+ * Clase principal del portlet.
+ * Crea una lista de Usuarios
  */
+
 @Component(
 	immediate = true,
 	property = {
@@ -39,6 +43,8 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = Portlet.class
 )
+
+
 public class Usuarios extends MVCPortlet {
 	
 

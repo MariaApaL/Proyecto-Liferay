@@ -36,7 +36,15 @@
 	expandoBridge.getAttribute("phone");
 %>
 
-<div class="container">
+
+<portlet:actionURL var="deleteActionURL" name="processAction">
+	<portlet:param name="id" value="<%=  String.valueOf(selectedUser.getUserId()) %>"/>
+	<portlet:param name="mvcActionCommandName" value="delete-user" />
+</portlet:actionURL>
+
+
+
+<div class="container-info">
 	<div class="row text-center">
 
 		<div class="col-xl-6 col-sm-2 mb-5">
@@ -62,10 +70,12 @@
 				<span class="small text-uppercase text-muted"><%=expandoBridge.getAttribute("phone")%></span>
 				<br>
 				<br>
-				<h5 class="mb-0">Email:</h5>
+				<h5 class="mb-0">Email: </h5>
 				<span class="small text-uppercase text-muted"><%=selectedUser.getEmailAddress()%></span>
+				<a href= "<%= deleteActionURL%>">Información</a>
 				
 				
+
 
 
 

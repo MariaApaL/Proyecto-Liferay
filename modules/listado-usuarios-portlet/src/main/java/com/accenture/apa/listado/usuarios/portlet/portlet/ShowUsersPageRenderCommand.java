@@ -11,6 +11,14 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
+/**
+ * 
+ * @author maria.luque.lopez
+ * 
+ * Clase para recoger el id del usuario y redirigir a la vista "info.jsp"
+ *
+ */
+
 @Component(
 		immediate = true,
 		property = {
@@ -20,11 +28,15 @@ import org.osgi.service.component.annotations.Component;
 		},
 		service = MVCRenderCommand.class
 	)
+
+
+
 public class ShowUsersPageRenderCommand implements MVCRenderCommand {
 
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		
+		//Recoge el id la función javascript en la vista "view.jsp"
 		long id = ParamUtil.getLong(renderRequest, "id");
 		
 		return "/info.jsp";

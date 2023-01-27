@@ -13,17 +13,21 @@
 
 
 <%
+//Recogemos lista de usuarios
 	List<User> users = (List<User>) request.getAttribute("users");
 
+//Sirve para mostrar el avatar
 	themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+
+//Obtenemos el id de nuestro portlet
 	String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
-	System.out.println(portletId);
+	
 	
     
 %>
 
 
-
+<!-- Render URL para navegar a otra vista y volver atras. -->
 <liferay-portlet:renderURL var="usersURL">
 	<liferay-portlet:param name="mvcRenderCommandName" value="show-users" />
 	<liferay-portlet:param name="backURL" value="<%=currentURL%>" />
@@ -53,17 +57,18 @@
 						alt="avatar" width="100"
 						class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
 					<br>
+
 					<h5 class="mb-0"><%=users.get(i).getFullName()%></h5>
 
 					<span class="small text-uppercase text-muted"><%=users.get(i).getJobTitle()%></span>
 					<br> <br>
 
-					<button class="boton-lista" onClick="createRowURL('<%=users.get(i).getUserId()%>')">Información</button>
+					<button class="info" onClick="createRowURL('<%=users.get(i).getUserId()%>')">Información</button>
 
 				</div>
 			</div>
 
-
+ 
 			<%
 				}
 
