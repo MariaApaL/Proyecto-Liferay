@@ -34,15 +34,16 @@
 	//Sirve para recoger un campo personalizable. Solo se pueden buscar los de tipo String
 	ExpandoBridge expandoBridge = selectedUser.getExpandoBridge();
 	expandoBridge.getAttribute("phone");
+
+	String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
 %>
 
 
-<portlet:actionURL var="deleteActionURL" name="processAction">
-	<portlet:param name="id" value="<%=  String.valueOf(selectedUser.getUserId()) %>"/>
-	<portlet:param name="mvcActionCommandName" value="delete-user" />
+
+<portlet:actionURL var="deleteURL" name="processAction">
+	<%-- 	<portlet:param name="id" value="<%= String.valueOf(selectedUser.getUserId()) %>"/>
+	 --%>
 </portlet:actionURL>
-
-
 
 <div class="container-info">
 	<div class="row text-center">
@@ -52,32 +53,45 @@
 				<img src="<%=selectedUser.getPortraitURL(themeDisplay)%>"
 					alt="avatar" width="100"
 					class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-				<br>
-				<br>
+				<br> <br>
 				<h5 class="mb-0">Usuario</h5>
 				<span class="small text-uppercase text-muted"><%=selectedUser.getScreenName()%></span>
-				<br>
-				<br>
+				<br> <br>
 				<h5 class="mb-0">Nombre completo:</h5>
 				<span class="small text-uppercase text-muted"><%=selectedUser.getFullName()%></span>
-				<br>
-				<br>
+				<br> <br>
 				<h5 class="mb-0">Sector:</h5>
 				<span class="small text-uppercase text-muted"><%=selectedUser.getJobTitle()%></span>
-				<br>
-				<br>
+				<br> <br>
 				<h5 class="mb-0">Teléfono de Contacto:</h5>
 				<span class="small text-uppercase text-muted"><%=expandoBridge.getAttribute("phone")%></span>
-				<br>
-				<br>
-				<h5 class="mb-0">Email: </h5>
+				<br> <br>
+				<h5 class="mb-0">Email:</h5>
 				<span class="small text-uppercase text-muted"><%=selectedUser.getEmailAddress()%></span>
-				<a href= "<%= deleteActionURL%>">Información</a>
+
+<%-- 
+			<!-- Intento con un form -->
+				<form action="<%=deleteURL%>" name="deleteActionForm"
+					method="POST">
+
+
+					<input type="hidden" name="id" value="<%=String.valueOf(selectedUser.getUserId())%>" /> 
 				
-				
+				<input type="submit" value="Delete User" />
+
+				</form>
+
+
+				<!-- Intento con una etiqueta a  -->
+				<a href="<%=deleteURL%>">Borrar</a>
 
 
 
+				<!-- Intento con un botón	 -->
+
+				<button class="info"
+					onClick="deleteUser('<%=selectedUser.getUserId()%>')">Borrar</button>
+ --%>
 
 			</div>
 		</div>
@@ -85,4 +99,18 @@
 	</div>
 </div>
 
+
 <liferay-ui:header title="Volver" backURL="<%=backURL%>"></liferay-ui:header>
+
+
+<script type="text/javascript">
+	function deleteUser(id) {
+		console.log("entro al metodo");
+		var actionURL = Liferay.PortletURL.createActionURL();
+		actionURL.setParameter("mvcActionCommandName", "delete-user");
+		actionURL.setParameter("id", id);
+        
+		actionURL.setPortletId("<%=portletId%>");
+
+	}
+</script>

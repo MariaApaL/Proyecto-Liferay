@@ -51,6 +51,10 @@
 					if (!(users.get(i).getFirstName().equals("")) && !(users.get(i).getFirstName().equals("Anonymous"))) {
 					
 			%>
+			
+		
+					
+					
 			<div class="col-xl-6 col-sm-2 mb-5">
 				<div class="bg-white rounded shadow-sm py-5 px-4">
 					<img src="<%=users.get(i).getPortraitURL(themeDisplay)%>"
@@ -64,6 +68,11 @@
 					<br> <br>
 
 					<button class="info" onClick="createRowURL('<%=users.get(i).getUserId()%>')">Información</button>
+
+
+			
+
+
 
 				</div>
 			</div>

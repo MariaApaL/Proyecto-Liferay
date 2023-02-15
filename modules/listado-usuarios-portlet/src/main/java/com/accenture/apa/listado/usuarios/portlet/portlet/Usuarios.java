@@ -71,8 +71,6 @@ public class Usuarios extends MVCPortlet {
    
 		super.doView(renderRequest, renderResponse);
 		
-	
-		
 		
 	}
 	

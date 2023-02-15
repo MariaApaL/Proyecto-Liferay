@@ -14,36 +14,29 @@ import javax.portlet.PortletException;
 
 import org.osgi.service.component.annotations.Component;
 
+@Component(immediate = true, property = {
 
-
-@Component(
-		immediate = true,
-		property = {
-			
-				"javax.portlet.name=" + UsuariosKeys.USUARIOS,
-				"mvc.command.name=delete-user"
-		},
-		service = MVCActionCommand.class
-	)
+		"javax.portlet.name=" + UsuariosKeys.USUARIOS,
+		"mvc.command.name=delete-user" }, service = MVCActionCommand.class)
 
 public class UsersActionCommand implements MVCActionCommand {
 
 	@Override
 	public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
-		deleteUser(actionRequest,actionResponse);
-		return true;
-	}
-	
-	public void deleteUser (ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
-		try{
-			long idUser = ParamUtil.getLong(actionRequest, "id");
-		
 
-		User user = UserLocalServiceUtil.deleteUser(idUser);
-		
-		}catch(Exception e) {
+		try {
+			long idUser = ParamUtil.getLong(actionRequest, "id");
+
+			User user = UserLocalServiceUtil.deleteUser(idUser);
+			
+			
+			
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return true;
 	}
 
 }
